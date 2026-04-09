@@ -58,7 +58,7 @@ export const post_movies = async (req: Request, res: Response) => {
 
 export const movies_all = async (req: Request, res: Response) => {
   const page = Number(req.query.page) || 1;
-  const limit = 20;
+  const limit = 16;
   try {
     const total_page = Math.ceil((await Movie.countDocuments()) / limit);
     const movies = await Movie.find({})
