@@ -7,16 +7,6 @@ import path from "path";
 
 dotenv.config();
 
-const server = express();
-server.use(cors(corsOptions));
-
-server.use(express.json());
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:3000",
-  "https://your-frontend.vercel.app", // domain production của bạn
-];
-
 const corsOptions = {
   origin: function (origin, callback) {
     // Cho phép request không có origin (Postman, mobile app, curl)
@@ -30,6 +20,17 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
+
+
+const server = express();
+server.use(cors(corsOptions));
+
+server.use(express.json());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://your-frontend.vercel.app", // domain production của bạn
+];
 
 server.use(
   "/uploads",
