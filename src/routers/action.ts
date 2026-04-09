@@ -16,6 +16,9 @@ import { upload } from "../middleware/upload.ts";
 
 export const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.send("Backend is running...");
+});
 //
 router.post("/register", register);
 router.post("/login", login);
