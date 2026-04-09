@@ -10,14 +10,26 @@ dotenv.config();
 const server = express();
 
 server.use(express.json());
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://your-frontend.vercel.app", // domain production của bạn
+];
+
 const corsOptions = {
-  origin: "http://localhost:5173", // Thay thế bằng URL frontend của bạn
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Các phương thức HTTP được phép
-  credentials: true, // Cho phép gửi cookie và header Authorization
-  optionsSuccessStatus: 204, // Một số trình duyệt cũ (IE11, một số SmartTV) không xử lý 200 cho preflight
+  origin: function (origin, callback) {
+    // Cho phép request không có origin (Postman, mobile app, curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked: ${origin}`));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
 };
 
-server.use(cors(corsOptions));
 server.use(
   "/uploads",
   express.static(path.join(process.cwd(), "src", "uploads")),
