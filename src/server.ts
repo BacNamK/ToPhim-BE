@@ -8,6 +8,7 @@ import path from "path";
 dotenv.config();
 
 const server = express();
+server.use(cors(corsOptions));
 
 server.use(express.json());
 const allowedOrigins = [
