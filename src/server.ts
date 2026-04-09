@@ -10,12 +10,6 @@ dotenv.config();
 const server = express();
 
 server.use(express.json());
-server.use(
-  "/uploads",
-  express.static(path.join(process.cwd(), "src", "uploads")),
-);
-server.use(router);
-
 const corsOptions = {
   origin: "http://localhost:5173", // Thay thế bằng URL frontend của bạn
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Các phương thức HTTP được phép
@@ -24,6 +18,12 @@ const corsOptions = {
 };
 
 server.use(cors(corsOptions));
+server.use(
+  "/uploads",
+  express.static(path.join(process.cwd(), "src", "uploads")),
+);
+server.use(router);
+
 
 try {
   await connectDB();
