@@ -17,7 +17,7 @@ server.use(
 server.use(router);
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Thay thế bằng URL frontend của bạn
+  origin: "http://localhost:5173", // Thay thế bằng URL frontend của bạn
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Các phương thức HTTP được phép
   credentials: true, // Cho phép gửi cookie và header Authorization
   optionsSuccessStatus: 204, // Một số trình duyệt cũ (IE11, một số SmartTV) không xử lý 200 cho preflight
